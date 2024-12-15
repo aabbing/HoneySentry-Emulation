@@ -1,0 +1,11 @@
+--- routersploit/modules/scanners/autopwn.py
++++ routersploit/modules/scanners/autopwn.py
+@@ -169,7 +169,7 @@ class Exploit(Exploit):
+         #        elif exploit.target_protocol not in ["tcp", "udp"]:
+         #            exploit.target_protocol = "custom"
+ 
+-                response = exploit.check()
++                response = exploit.run()
+ 
+                 if response is True:
+                     print_info("\033[92m[+]\033[0m", "{}:{} {} {} is vulnerable".format(

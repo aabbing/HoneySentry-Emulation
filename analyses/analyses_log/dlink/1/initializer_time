@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "./initializer.py", line 128, in <module>
+    initializer.Connect()
+  File "./initializer.py", line 46, in Connect
+    self.driver = webdriver.Chrome(chrome_options=options)
+TypeError: __init__() got an unexpected keyword argument 'chrome_options'
+
+real	0m0.934s
+user	0m0.577s
+sys	0m0.171s

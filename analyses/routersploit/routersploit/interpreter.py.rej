@@ -1,0 +1,31 @@
+--- routersploit/interpreter.py
++++ routersploit/interpreter.py
+@@ -311,6 +311,28 @@ class RoutersploitInterpreter(BaseInterpreter):
+ 
+         return
+ 
++    def run_command(self, in_command):
++        """ Routersploit main entry point. Starting interpreter loop. """
++
++        #print_info(self.banner)
++        printer_queue.join()
++        try:
++            command, args, _ = self.parse_line(in_command)
++            if not command:
++                pass
++            command_handler = self.get_command_handler(command)
++            command_handler(args)
++        except RoutersploitException as err:
++            print_error(err)
++        except EOFError:
++            print_info()
++            print_status("routersploit stopped")
++            return
++        except KeyboardInterrupt:
++            print_info()
++        finally:
++            printer_queue.join()
++
+     @property
+     def module_metadata(self):
+         return getattr(self.current_module, "_{}__info__".format(self.current_module.__class__.__name__))
