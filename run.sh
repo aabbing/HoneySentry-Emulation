@@ -77,7 +77,7 @@ function run_emulation()
     echo "[*] ${1} emulation start!!!"
     INFILE=${1}
     BRAND=`get_brand ${INFILE} ${BRAND}`
-    FILENAME=`basename ${INFILE%.*}`
+    FILENAME=`basename $INFILE`
     PING_RESULT=false
     WEB_RESULT=false
     IP=''
