@@ -77,7 +77,7 @@ function run_emulation()
     echo "[*] ${1} emulation start!!!"
     INFILE=${1}
     BRAND=`get_brand ${INFILE} ${BRAND}`
-    FILENAME=`basename ${INFILE%.*}`
+    FILENAME=`basename ${INFILE}`
     PING_RESULT=false
     WEB_RESULT=false
     IP=''
@@ -129,7 +129,7 @@ function run_emulation()
     chmod a+rwx "${WORK_DIR}"
     chown -R "${USER}" "${WORK_DIR}"
     chgrp -R "${USER}" "${WORK_DIR}"
-    echo $INFILE > ${WORK_DIR}/name
+    echo $FILENAME > ${WORK_DIR}/name
     echo $BRAND > ${WORK_DIR}/brand
     sync
 
