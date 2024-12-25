@@ -219,8 +219,8 @@ class ExtractionItem(object):
     """
 
     # Maximum recursion breadth and depth
-    RECURSION_BREADTH = 10
-    RECURSION_DEPTH = 3
+    RECURSION_BREADTH = 15
+    RECURSION_DEPTH = 10
     database = None
 
     def __init__(self, extractor, path, depth, tag=None, debug=False):
@@ -709,9 +709,11 @@ class ExtractionItem(object):
         #dir_name = module.extractor.directory
         #desc = entry.description
         # filesystem for the netgear WNR2000 firmware (kernel in Squashfs)
+        #print(f"\033[1;33m{dir_name}\033[0m")
         if 'filesystem' in desc or 'file system' in desc or 'archive' in desc or 'compressed' in desc or 'TRX' in desc or 'firmware' in desc or 'image' in desc:
         #if dir_name:
             if dir_name:
+                print(f"\033[1;35m{dir_name}\033[0m")
                 self.printf(">> Recursing into %s ..." % desc)
                 count = 0
                 for root, dirs, files in os.walk(dir_name):
@@ -720,6 +722,7 @@ class ExtractionItem(object):
                     files.sort()
                     files.sort(key=len)
                     if (not self.extractor.do_rootfs or self.get_rootfs_status()) and 'bin' in dirs and 'lib' in dirs:
+                        #print(f"\033[1;35mrecursive break\033[0m")
                         break
 
                     # handle case where original file name is restored; put
@@ -738,8 +741,8 @@ class ExtractionItem(object):
     #                            self.printf(">> Skipping: recursion breadth %d"\
     #                                % ExtractionItem.RECURSION_BREADTH)
     #                            return False
-
                         path = os.path.join(root, filename)
+                        print(f"\033[1;35m{path}\033[0m")
                         if not pathlib.Path(path).is_file():
                             continue
                         new_item = ExtractionItem(self.extractor,
